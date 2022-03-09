@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import Test from "./Components/Test/Test";
+import React  from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './Pages/Home';
+import AddQuestion from './Pages/AddQuestion';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <Test />
-        <div className="test">
-            test2
-        </div>
-    </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="addQuestion" element={<AddQuestion />} />
+            </Routes>
+        </Router>
   )
 }
 
