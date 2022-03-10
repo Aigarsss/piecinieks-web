@@ -11,7 +11,8 @@ const AddQuestion = () => {
         <div>
             <nav>
                 <Link to="/">Home</Link> |{" "}
-                <Link to="/addQuestion">Pievienot</Link>
+                <Link to="/addQuestion">Pievienot</Link> |{" "}
+                <Link to="/signUp">Reģistrēties</Link>
             </nav>
             Add question
         </div>
