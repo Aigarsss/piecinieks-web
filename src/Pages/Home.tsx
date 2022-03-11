@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
 import { useQuery, gql} from '@apollo/client'
+import NavBar from "@app/Components/NavBar";
 
 const GET_QUESTIONS = gql`
     query {
@@ -41,11 +42,7 @@ const Home = () => {
 
     return (
         <div>
-            <nav>
-                <Link to="/">Home</Link> |{" "}
-                <Link to="/addQuestion">Pievienot</Link> |{" "}
-                <Link to="/signUp">Reģistrēties</Link>
-            </nav>
+            <NavBar />
             Home.
             <ul>
                 {data && !error && data.questions.map(item => {

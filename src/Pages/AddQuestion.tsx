@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
-import {Link} from "react-router-dom";
+import NavBar from "@app/Components/NavBar";
+
 
 const AddQuestion = () => {
 
@@ -9,11 +10,7 @@ const AddQuestion = () => {
 
     return (
         <div>
-            <nav>
-                <Link to="/">Home</Link> |{" "}
-                <Link to="/addQuestion">Pievienot</Link> |{" "}
-                <Link to="/signUp">Reģistrēties</Link>
-            </nav>
+            <NavBar />
             Add question
         </div>
     );
