@@ -1,9 +1,7 @@
-import React, {useEffect} from 'react';
-import NavBar from "@app/Components/NavBar";
-
+import React, { useEffect } from 'react';
+import NavBar from '@app/Components/NavBar';
 
 const AddQuestion = () => {
-
     useEffect(() => {
         document.title = 'Pievienot jautājumu - Piecinieks';
     });
