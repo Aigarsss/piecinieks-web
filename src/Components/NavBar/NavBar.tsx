@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
+import {useLogin} from "@app/Hooks/useLogin";
 
 const IS_LOGGED_IN = gql`
     {
@@ -10,6 +11,7 @@ const IS_LOGGED_IN = gql`
 
 const NavBar = () => {
     const { data, client, loading } = useQuery(IS_LOGGED_IN);
+    const { isAdmin } = useLogin();
 
     const handleLogOut = () => {
         localStorage.removeItem('token');
@@ -20,7 +22,9 @@ const NavBar = () => {
     return (
         <nav>
             <Link to="/">Home</Link>
-            <Link to="/addQuestion">Pievienot</Link>
+            {
+                isAdmin && <Link to="/admin">Admin</Link>
+            }
             {!loading && data.isLoggedIn ? (
                 <button
                     onClick={handleLogOut}
