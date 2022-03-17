@@ -1,10 +1,10 @@
-import {ApolloError, gql, useQuery} from "@apollo/client";
+import { ApolloError, gql, useQuery } from '@apollo/client';
 
 type UseLogin = {
     loading: boolean;
     error: ApolloError | undefined;
     isAdmin: boolean;
-}
+};
 
 const ME = gql`
     query {
@@ -18,7 +18,7 @@ const ME = gql`
 
 export const useLogin = (): UseLogin => {
     const { data, loading, error } = useQuery(ME, {
-        fetchPolicy: "cache-and-network"
+        fetchPolicy: 'cache-and-network'
     });
     const isAdmin = !loading && !error && data?.me?.admin;
 

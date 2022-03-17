@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
-import {useLogin} from "@app/Hooks/useLogin";
+import { useLogin } from '@app/Hooks/useLogin';
 
 const IS_LOGGED_IN = gql`
     {
@@ -20,11 +20,9 @@ const NavBar = () => {
     };
 
     return (
-        <nav>
+        <nav className="flex justify-around">
             <Link to="/">Home</Link>
-            {
-                isAdmin && <Link to="/admin">Admin</Link>
-            }
+            {isAdmin && <Link to="/admin">Admin</Link>}
             {!loading && data.isLoggedIn ? (
                 <button
                     onClick={handleLogOut}
