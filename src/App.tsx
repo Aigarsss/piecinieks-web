@@ -18,8 +18,6 @@ const PrivateAdminRoute: React.FC<PrivateAdminRouteProps> = ({ component: Compon
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error</div>;
 
-    console.log(isAdmin);
-
     return isAdmin ? <Component /> : <Navigate to="/" />;
 };
 
