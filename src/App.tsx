@@ -1,7 +1,7 @@
 import React, { ReactComponentElement } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './Pages/Home';
-import AddQuestion from './Pages/AddQuestion';
+// import AddQuestion from './Pages/AddQuestion';
 import SignUp from './Pages/SignUp';
 import './App.css';
 import SignIn from '@app/Pages/SignIn';
@@ -28,7 +28,7 @@ const App: React.FC = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/signUp" element={<SignUp />} />
                 <Route path="/signIn" element={<SignIn />} />
-                <Route path="/addQuestion" element={<PrivateAdminRoute component={AddQuestion} />} />
+                {/*<Route path="/addQuestion" element={<PrivateAdminRoute component={AddQuestion} />} />*/}
                 <Route path="/admin" element={<PrivateAdminRoute component={Admin} />} />
             </Routes>
         </Router>

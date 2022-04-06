@@ -1,20 +1,10 @@
 import React, { useEffect } from 'react';
 import NavBar from '@app/Components/NavBar';
-import { useMutation, useApolloClient, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import UniversalForm from '@app/Components/UniversalForm';
-
-const SIGN_UP = gql`
-    mutation signUp($email: String!, $username: String!, $password: String!) {
-        signUp(email: $email, username: $username, password: $password)
-    }
-`;
-
-const IS_LOGGED_IN = gql`
-    {
-        isLoggedIn @client
-    }
-`;
+import { IS_LOGGED_IN } from '@app/gql/Queries';
+import { SIGN_UP } from '@app/gql/Mutations';
 
 const SignUp: React.FC = () => {
     const navigate = useNavigate();

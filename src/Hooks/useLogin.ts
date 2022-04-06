@@ -1,20 +1,11 @@
-import { ApolloError, gql, useQuery } from '@apollo/client';
+import { ApolloError, useQuery } from '@apollo/client';
+import { ME } from '@app/gql/Queries';
 
 type UseLogin = {
     loading: boolean;
     error: ApolloError | undefined;
     isAdmin: boolean;
 };
-
-const ME = gql`
-    query {
-        me {
-            id
-            username
-            admin
-        }
-    }
-`;
 
 export const useLogin = (): UseLogin => {
     const { data, loading, error } = useQuery(ME, {

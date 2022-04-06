@@ -1,55 +1,9 @@
 import React, { useState } from 'react';
 import NavBar from '@app/Components/NavBar';
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import QuestionTable from '@app/Components/QuestionTable';
-
-const GET_QUESTIONS = gql`
-    query {
-        questions {
-            id
-            question
-            answer
-            acceptedAnswers
-            explanation
-            airedAt
-            createdAt
-            updatedAt
-        }
-    }
-`;
-
-const ADD_QUESTION = gql`
-    mutation addQuestion(
-        $question: String!
-        $answer: String!
-        $accepted_answer: String!
-        $explanation: String
-        $air_date: String
-    ) {
-        addQuestion(
-            question: $question
-            answer: $answer
-            acceptedAnswers: $accepted_answer
-            explanation: $explanation
-            airedAt: $air_date
-        ) {
-            id
-            question
-            answer
-            acceptedAnswers
-            explanation
-            airedAt
-            createdAt
-            updatedAt
-        }
-    }
-`;
-
-const DELETE_QUESTION = gql`
-    mutation deleteQuestion($id: ID!) {
-        deleteQuestion(id: $id)
-    }
-`;
+import { GET_QUESTIONS } from '@app/gql/Queries';
+import { ADD_QUESTION, DELETE_QUESTION } from '@app/gql/Mutations';
 
 type Question = {
     id: string;
@@ -106,7 +60,8 @@ const Admin = () => {
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         const addedQuestion = await addQuestion({
-            variables: { ...formValue }
+            variables: { ...formValue },
+            refetchQueries: [{ query: GET_QUESTIONS }]
         });
 
         // Clear all fields except the air date
@@ -129,7 +84,8 @@ const Admin = () => {
         await deleteQuestion({
             variables: {
                 id: itemId
-            }
+            },
+            refetchQueries: [{ query: GET_QUESTIONS }]
         });
 
         setAddedQuestions(addedQuestions.filter((item) => item.id !== itemId));
@@ -139,9 +95,6 @@ const Admin = () => {
         return <div>Loading</div>;
     }
 
-    // @ts-ignore
-    // @ts-ignore
-    // @ts-ignore
     return (
         <div>
             <NavBar />

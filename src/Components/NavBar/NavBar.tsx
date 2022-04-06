@@ -2,12 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import { useLogin } from '@app/Hooks/useLogin';
-
-const IS_LOGGED_IN = gql`
-    {
-        isLoggedIn @client
-    }
-`;
+import { IS_LOGGED_IN } from '@app/gql/Queries';
 
 const NavBar = () => {
     const { data, client, loading } = useQuery(IS_LOGGED_IN);
