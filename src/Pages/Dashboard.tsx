@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from '@app/Components/NavBar';
-import AdminDashboard from "@app/Components/AdminDashboard";
-import {useLogin} from "@app/Hooks/useLogin";
+import AdminDashboard from '@app/Components/AdminDashboard';
+import { useLogin } from '@app/Hooks/useLogin';
 
 const Dashboard = () => {
     // TODO, handle admin check here
@@ -10,9 +10,7 @@ const Dashboard = () => {
     return (
         <div>
             <NavBar />
-            {
-                isAdmin ? <AdminDashboard /> : <div>Sadaļa pieejama tikai adminiem</div>
-            }
+            {isAdmin ? <AdminDashboard /> : <div>Sadaļa pieejama tikai adminiem</div>}
         </div>
     );
 };

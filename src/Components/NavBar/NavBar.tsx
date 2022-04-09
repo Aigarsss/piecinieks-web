@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLogin } from '@app/Hooks/useLogin';
 
 const NavBar = () => {
-    const { isLoggedIn, handleLogOut} = useLogin();
+    const { isLoggedIn, handleLogOut } = useLogin();
 
     return (
         <nav className="navbar navbar-expand-lg shadow-md py-2 bg-white relative flex items-center w-full justify-between mb-8">
@@ -16,6 +16,14 @@ const NavBar = () => {
                                 className="nav-link rounded-lg block pr-2 lg:px-2 py-2 text-gray-600 hover:bg-blue-100 focus:text-gray-700 transition duration-300 ease-in-out"
                             >
                                 Home
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link
+                                to="/dashboard"
+                                className="nav-link rounded-lg block pr-2 lg:px-2 py-2 text-gray-600 hover:bg-blue-100 focus:text-gray-700 transition duration-300 ease-in-out"
+                            >
+                                Dashboard
                             </Link>
                         </li>
                         {isLoggedIn ? (

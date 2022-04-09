@@ -5,7 +5,7 @@ import Home from './Pages/Home';
 import SignUp from './Pages/SignUp';
 import './App.css';
 import SignIn from '@app/Pages/SignIn';
-import Dashboard from "@app/Pages/Dashboard";
+import Dashboard from '@app/Pages/Dashboard';
 import { useLogin } from '@app/Hooks/useLogin';
 import Loader from '@app/Components/Loader';
 
