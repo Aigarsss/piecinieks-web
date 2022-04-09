@@ -1,23 +1,14 @@
 import React, { useEffect } from 'react';
 import NavBar from '@app/Components/NavBar';
 import UniversalForm from '@app/Components/UniversalForm';
-import { useMutation } from '@apollo/client';
-import { useNavigate } from 'react-router-dom';
-import { IS_LOGGED_IN } from '@app/gql/Queries';
-import { SIGN_IN } from '@app/gql/Mutations';
+import { useLogin } from '@app/Hooks/useLogin';
 
 const SignIn = () => {
-    const navigate = useNavigate();
+    const { signIn, redirectIfLoggedIn } = useLogin();
+    redirectIfLoggedIn();
+
     useEffect(() => {
         document.title = 'Ienākt - Piecinieks';
-    });
-
-    const [signIn, { loading, error, client }] = useMutation(SIGN_IN, {
-        onCompleted: (data) => {
-            localStorage.setItem('token', data.signIn);
-            client.writeQuery({ query: IS_LOGGED_IN, data: { isLoggedIn: true } });
-            navigate('/');
-        }
     });
 
     return (

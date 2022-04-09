@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useLogin } from '@app/Hooks/useLogin';
 import { IS_LOGGED_IN } from '@app/gql/Queries';
 
@@ -44,7 +44,7 @@ const NavBar = () => {
                 {/*    </button>*/}
                 {/*</div>*/}
                 <div className="navbar-collapse collapse grow items-center" id="navbarSupportedContentY">
-                    <ul className="navbar-nav mr-auto lg:flex lg:flex-row">
+                    <ul className="navbar-nav mr-auto flex lg:flex-row">
                         <li className="nav-item">
                             <Link
                                 to="/"

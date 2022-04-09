@@ -39,6 +39,7 @@ type FormValues = {
 };
 
 const Admin = () => {
+    // TODO, handle admin check here
     const [formValue, setFormValue] = useState<FormValues>(formInitialValues);
     const [addedQuestions, setAddedQuestions] = useState<Array<Question>>([]);
     const [pageArea, setPageArea] = useState<PageArea>('add');
@@ -203,7 +204,7 @@ const Admin = () => {
             )}
 
             <QuestionTable
-                questions={pageArea === 'add' ? addedQuestions : data.questions}
+                questions={pageArea === 'add' ? addedQuestions : data?.questions}
                 handleDelete={handleDelete}
             />
 
