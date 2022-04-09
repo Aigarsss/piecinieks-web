@@ -11,6 +11,7 @@ type UseLogin = {
     signIn: () => void;
     signUp: () => void;
     redirectIfLoggedIn: () => void;
+    handleLogOut: () => void;
 };
 
 type Location = {
@@ -60,6 +61,14 @@ export const useLogin = (): UseLogin => {
         }
     });
 
+    // Handle logging out
+    const handleLogOut = async () => {
+        localStorage.removeItem('token');
+        await signInClient.resetStore();
+        signInClient.writeQuery({ query: IS_LOGGED_IN, data: { isLoggedIn: false } });
+        navigate('/');
+    };
+
     const redirectIfLoggedIn = () => {
         if (isLoggedIn) {
             navigate('/');
@@ -73,6 +82,7 @@ export const useLogin = (): UseLogin => {
         isLoggedIn,
         signIn,
         signUp,
-        redirectIfLoggedIn
+        redirectIfLoggedIn,
+        handleLogOut
     };
 };
