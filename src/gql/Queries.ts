@@ -7,7 +7,7 @@ export const IS_LOGGED_IN = gql`
 `;
 
 export const ME = gql`
-    query {
+    query me {
         me {
             id
             username
@@ -17,7 +17,7 @@ export const ME = gql`
 `;
 
 export const GET_QUESTIONS = gql`
-    query {
+    query questions {
         questions {
             id
             question
@@ -27,6 +27,27 @@ export const GET_QUESTIONS = gql`
             airedAt
             createdAt
             updatedAt
+        }
+    }
+`;
+
+export const GET_RANDOM_QUESTION = gql`
+    query randomQuestion($usedIds: [String]) {
+        randomQuestion(usedIds: $usedIds) {
+            id
+            question
+        }
+    }
+`;
+
+export const CHECK_ANSWER = gql`
+    query checkAnswer($id: ID!, $answer: String) {
+        checkAnswer(id: $id, answer: $answer) {
+            id
+            answer
+            acceptedAnswers
+            explanation
+            isCorrect
         }
     }
 `;
