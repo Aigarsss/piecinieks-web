@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import NavBar from '@app/Components/NavBar';
 import { useQuestion } from '@app/Hooks/useQuestion';
 
-// Check if it makes sense to use controlled inputs
-const formInitialValue = {
-    answer: ''
+const answerFormInitialValue = '';
+
+const questionFormInitialValue = {
+    question_count: 5,
+    time_limit: 0
 };
 
-type Answer = {
-    answer?: string;
+type QuestionForm = {
+    question_count: any;
+    time_limit: any;
 };
 
 const Home = () => {
@@ -18,7 +21,10 @@ const Home = () => {
     const [isShowingAnswer, setIsShowingAnswer] = useState(false);
     const [currentQuestion, setCurrentQuestion] = useState<any>({});
     const [correctAnswer, setCorrectAnswer] = useState<any>({});
-    const [answerFormValue, setAnswerFormValue] = useState<Answer>(formInitialValue);
+    const [answerFormValue, setAnswerFormValue] = useState<string>(answerFormInitialValue);
+    const [questionFormValue, setQuestionFormValue] = useState<QuestionForm>(questionFormInitialValue);
+    const [questionNumber, setQuestionNumber] = useState<number>(0);
+    const [result, setResult] = useState<number>(0);
 
     useEffect(() => {
         document.title = 'Sākums - Piecinieks';
@@ -36,8 +42,16 @@ const Home = () => {
         setUsedIds([...usedIds, data.randomQuestion[0].id]);
         setCurrentQuestion({ currentQuestion, ...data.randomQuestion[0] });
 
+        setQuestionNumber(questionNumber + 1);
+
         // Show fetched question
         setIsShowingQuestion(true);
+
+        setIsShowingAnswer(false);
+
+        // Clear correct answer data and form
+        setAnswerFormValue('');
+        setCorrectAnswer({});
     };
 
     const handleSubmitAnswer = async (e: any) => {
@@ -52,31 +66,57 @@ const Home = () => {
             }
         });
 
+        setIsShowingQuestion(false);
         setCorrectAnswer({ currentQuestion, ...data.checkAnswer });
+        if (data.checkAnswer.isCorrect) {
+            setResult(result +1 )
+        }
         setIsShowingAnswer(true);
+    };
+
+    const handleQuestionFormChange = (e: any) => {
+        setQuestionFormValue({ ...questionFormValue, [e.target.name]: e.target.value });
+    };
+
+    const handleShowResult = () => {
+        console.log(`Result: ${result}`);
+        // Reset result
+        setResult(0);
     };
 
     return (
         <div>
             <NavBar />
             {/*TODO, move to component*/}
-            <form onSubmit={(e: any) => handleRequestQuestion(e)} className="flex flex-col">
-                <label htmlFor="question_count">Jautājumu skaits</label>
-                <select name="question_count" id="question_count">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                </select>
-                <label htmlFor="time_limit">Laika limits</label>
-                <select name="time_limit" id="time_limit">
-                    <option value="0">No limit</option>
-                    <option value="30">30s</option>
-                    <option value="60">1min</option>
-                    <option value="120">2min</option>
-                </select>
-                <input type="submit" value="Aiziet" />
-            </form>
+            {questionNumber === 0 && (
+                <form onSubmit={(e: any) => handleRequestQuestion(e)} className="flex flex-col">
+                    <label htmlFor="question_count">Jautājumu skaits</label>
+                    <select
+                        name="question_count"
+                        id="question_count"
+                        onChange={handleQuestionFormChange}
+                        defaultValue={questionFormValue.question_count}
+                    >
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                    </select>
+                    <label htmlFor="time_limit">Laika limits</label>
+                    <select
+                        name="time_limit"
+                        id="time_limit"
+                        onChange={handleQuestionFormChange}
+                        defaultValue={questionFormValue.time_limit}
+                    >
+                        <option value="0">No limit</option>
+                        <option value="30">30s</option>
+                        <option value="60">1min</option>
+                        <option value="120">2min</option>
+                    </select>
+                    <input type="submit" value="Aiziet" />
+                </form>
+            )}
             {/*TODO, move to component*/}
             {isShowingQuestion && (
                 <div>
@@ -88,13 +128,29 @@ const Home = () => {
                             name="answer"
                             type="text"
                             onChange={(e: any) => setAnswerFormValue(e.target.value)}
+                            value={answerFormValue}
                         />
                         <input type="submit" value="Iesniegt" />
                     </form>
                 </div>
             )}
             {/*TODO, move to component*/}
-            {isShowingAnswer && <div>atbilde: {correctAnswer.isCorrect ? 'pareizi' : 'nepareizi'}</div>}
+            {isShowingAnswer && (
+                <div>
+                    atbilde: {correctAnswer.isCorrect ? 'pareizi' : 'nepareizi'}
+                    <button
+                        onClick={(e: any) => {
+                            if (questionNumber === questionFormValue.question_count) {
+                                handleShowResult();
+                            } else {
+                                handleRequestQuestion(e);
+                            }
+                        }}
+                    >
+                        {questionNumber === questionFormValue.question_count ? 'Beigt' : 'Nākamais jautājums'}
+                    </button>
+                </div>
+            )}
         </div>
     );
 };
