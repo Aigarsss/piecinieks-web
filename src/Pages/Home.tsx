@@ -19,6 +19,7 @@ const Home = () => {
     const [usedIds, setUsedIds] = useState<Array<String>>([]);
     const [isShowingQuestion, setIsShowingQuestion] = useState(false);
     const [isShowingAnswer, setIsShowingAnswer] = useState(false);
+    const [isShowingResult, setIsShowingResult] = useState(false);
     const [currentQuestion, setCurrentQuestion] = useState<any>({});
     const [correctAnswer, setCorrectAnswer] = useState<any>({});
     const [answerFormValue, setAnswerFormValue] = useState<string>(answerFormInitialValue);
@@ -69,7 +70,7 @@ const Home = () => {
         setIsShowingQuestion(false);
         setCorrectAnswer({ currentQuestion, ...data.checkAnswer });
         if (data.checkAnswer.isCorrect) {
-            setResult(result +1 )
+            setResult(result + 1);
         }
         setIsShowingAnswer(true);
     };
@@ -79,9 +80,19 @@ const Home = () => {
     };
 
     const handleShowResult = () => {
-        console.log(`Result: ${result}`);
-        // Reset result
+        setIsShowingAnswer(false);
+        setIsShowingResult(true);
+    };
+
+    const handlePlayAgain = () => {
+        // Resets
+        setIsShowingResult(false);
         setResult(0);
+        setQuestionNumber(0);
+        setQuestionFormValue(questionFormInitialValue);
+
+        // Resets used Ids. If there are a lot of questions, could consider not to reset
+        setUsedIds([]);
     };
 
     return (
@@ -149,6 +160,13 @@ const Home = () => {
                     >
                         {questionNumber === questionFormValue.question_count ? 'Beigt' : 'Nākamais jautājums'}
                     </button>
+                </div>
+            )}
+            {isShowingResult && (
+                <div>
+                    Apsveicu! Tavs rezultāts ir {result} pareizas atbildes no {questionFormValue.question_count}{' '}
+                    jautājumiem.
+                    <button onClick={handlePlayAgain}>Atpakaļ uz sākmu</button>
                 </div>
             )}
         </div>
