@@ -33,6 +33,7 @@ const Home = () => {
 
     const handleRequestQuestion = async (e: any) => {
         e.preventDefault();
+
         const { data } = await getRandomQuestion({
             variables: {
                 usedIds: usedIds
@@ -75,10 +76,6 @@ const Home = () => {
         setIsShowingAnswer(true);
     };
 
-    const handleQuestionFormChange = (e: any) => {
-        setQuestionFormValue({ ...questionFormValue, [e.target.name]: e.target.value });
-    };
-
     const handleShowResult = () => {
         setIsShowingAnswer(false);
         setIsShowingResult(true);
@@ -95,36 +92,38 @@ const Home = () => {
         setUsedIds([]);
     };
 
+    const handleQuestionFormChange = (area: string, e: any) => {
+        setQuestionFormValue({...questionFormValue, [area]: Number(e.target.value)});
+    }
+
     return (
-        <div>
+        <div style={{
+            background: 'linear-gradient(193.55deg, #FF3008 48.41%, #C60400 48.42%)',
+            height: '100%'
+        }}>
             <NavBar />
             {/*TODO, move to component*/}
             {questionNumber === 0 && (
                 <form onSubmit={(e: any) => handleRequestQuestion(e)} className="flex flex-col">
-                    <label htmlFor="question_count">Jautājumu skaits</label>
-                    <select
-                        name="question_count"
-                        id="question_count"
-                        onChange={handleQuestionFormChange}
-                        defaultValue={questionFormValue.question_count}
-                    >
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                    </select>
-                    <label htmlFor="time_limit">Laika limits</label>
-                    <select
-                        name="time_limit"
-                        id="time_limit"
-                        onChange={handleQuestionFormChange}
-                        defaultValue={questionFormValue.time_limit}
-                    >
-                        <option value="0">No limit</option>
-                        <option value="30">30s</option>
-                        <option value="60">1min</option>
-                        <option value="120">2min</option>
-                    </select>
+
+                    <div>Jautājumu skaits</div>
+
+                    <label htmlFor="5">5</label>
+                    <input name="5" id="5" value="5" checked={ questionFormValue['question_count'] === Number('5') } type="checkbox" onChange={(e) => handleQuestionFormChange('question_count', e)}/>
+                    <label htmlFor="10">10</label>
+                    <input name="10" id="10" value="10" checked={ questionFormValue['question_count'] === Number('10') } type="checkbox" onChange={(e) => handleQuestionFormChange('question_count',e)}/>
+                    <label htmlFor="20">20</label>
+                    <input name="20" id="20" value="20" checked={ questionFormValue['question_count'] === Number('20') } type="checkbox" onChange={(e) => handleQuestionFormChange('question_count',e)}/>
+
+                    <div>Laika limits</div>
+
+                    <label htmlFor="0">0</label>
+                    <input name="0" id="0" value="0" checked={ questionFormValue['time_limit'] === Number('0') } type="checkbox" onChange={(e) => handleQuestionFormChange('time_limit',e)}/>
+                    <label htmlFor="30">30s</label>
+                    <input name="30" id="30" value="30" checked={ questionFormValue['time_limit'] === Number('30') } type="checkbox" onChange={(e) => handleQuestionFormChange('time_limit',e)}/>
+                    <label htmlFor="60">1min</label>
+                    <input name="60" id="60" value="60" checked={ questionFormValue['time_limit'] === Number('60') } type="checkbox" onChange={(e) => handleQuestionFormChange('time_limit',e)}/>
+
                     <input type="submit" value="Aiziet" />
                 </form>
             )}
