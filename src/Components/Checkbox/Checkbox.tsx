@@ -1,5 +1,5 @@
 import React from 'react';
-import './checkbox.module.scss';
+import classes from './checkbox.module.scss';
 
 type CheckboxProps = {
     fieldType: string;
@@ -11,7 +11,7 @@ type CheckboxProps = {
 
 const Checkbox: React.FC<CheckboxProps> = ({ fieldType, label, value, checked, onChange }) => {
     return (
-        <span>
+        <span className={classes.checkbox}>
             <input
                 className="opacity-0 absolute"
                 name={value}

@@ -96,8 +96,10 @@ const Home = () => {
         setUsedIds([]);
     };
 
+    const containerClass = isShowingResult || questionNumber === 0 ? 'container-red' : 'container-light';
+
     return (
-        <div className="container">
+        <div className={containerClass}>
             {/*<NavBar />*/}
             {questionNumber === 0 && (
                 <StartQuiz
@@ -108,7 +110,7 @@ const Home = () => {
             )}
             {isShowingQuestion && (
                 <Question
-                    questionNumber={currentQuestion.question}
+                    question={currentQuestion.question}
                     handleSubmitAnswer={handleSubmitAnswer}
                     setAnswerFormValue={setAnswerFormValue}
                     answerFormValue={answerFormValue}

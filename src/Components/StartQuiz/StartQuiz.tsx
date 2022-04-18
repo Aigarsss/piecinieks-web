@@ -55,7 +55,7 @@ const StartQuiz: React.FC<StartQuizProps> = ({ questionFormValue, setQuestionFor
                     </div>
                 </div>
                 <input
-                    className="cursor-pointer rounded-full w-full bg-cream h-10 uppercase font-bold text-red"
+                    className="cursor-pointer rounded-full w-full bg-cream h-10 uppercase font-bold text-custom-red"
                     type="submit"
                     value="Aiziet"
                 />

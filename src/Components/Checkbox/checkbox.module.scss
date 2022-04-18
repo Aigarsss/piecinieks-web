@@ -1,16 +1,18 @@
-label {
-  background-color: transparent;
-  border: 2px solid $cream;
-  border-radius: 42px;
-  padding: 5px 20px;
-  margin-right: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  color: $cream;
-  transition: .5s ease;
-}
+.checkbox {
+  label {
+    background-color: transparent;
+    border: 2px solid $cream;
+    border-radius: 42px;
+    padding: 5px 20px;
+    margin-right: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    color: $cream;
+    transition: .5s ease;
+  }
 
-input:checked ~ label {
-  background-color: $cream;
-  color: $orange;
+  input:checked ~ label {
+    background-color: $cream;
+    color: $orange;
+  }
 }

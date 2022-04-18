@@ -1,0 +1,35 @@
+.question {
+  .answerInput {
+    width: 100%;
+    color: $darkGray;
+    height: 44px;
+    background: $white;
+    box-shadow: 0 11px 24px rgba(25, 25, 25, 0.06);
+    border-radius: 50px;
+    padding: 12px 30px;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  .submitIcon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    background-color: $disabledGray;
+    border-radius: 50%;
+    transition: 0.5s ease;
+    color: $white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .answerInput:not(:placeholder-shown) ~ .submitIcon {
+    background-color: $red;
+  }
+}
