@@ -5,6 +5,7 @@ module.exports = {
       colors: {
         'cream': '#FEF1E9',
         'custom-red': '#C60400',
+        'custom-orange': '#FF3008',
       },
     },
   },

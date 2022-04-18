@@ -118,7 +118,8 @@ const Home = () => {
             )}
             {isShowingAnswer && (
                 <Answer
-                    isCorrect={correctAnswer.isCorrect}
+                    correctAnswer={correctAnswer}
+                    submittedAnswer={answerFormValue}
                     questionNumber={questionNumber}
                     totalQuestions={questionFormValue.question_count}
                     handleShowResult={handleShowResult}

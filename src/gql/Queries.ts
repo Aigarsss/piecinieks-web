@@ -44,6 +44,7 @@ export const CHECK_ANSWER = gql`
     query checkAnswer($id: ID!, $answer: String) {
         checkAnswer(id: $id, answer: $answer) {
             id
+            question
             answer
             acceptedAnswers
             explanation
