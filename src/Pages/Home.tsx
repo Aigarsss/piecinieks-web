@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from '@app/Components/NavBar';
 import { useQuestion } from '@app/Hooks/useQuestion';
-import Checkbox from '@app/Components/Checkbox';
+import StartQuiz from '@app/Components/StartQuiz';
+import Result from '@app/Components/Result';
+import Question from '@app/Components/Question';
+import Answer from '@app/Components/Answer';
 
 const answerFormInitialValue = '';
 
@@ -11,8 +14,8 @@ const questionFormInitialValue = {
 };
 
 type QuestionForm = {
-    question_count: any;
-    time_limit: any;
+    question_count: number;
+    time_limit: number;
 };
 
 const Home = () => {
@@ -93,110 +96,35 @@ const Home = () => {
         setUsedIds([]);
     };
 
-    const handleQuestionFormChange = (area: string, e: any) => {
-        setQuestionFormValue({ ...questionFormValue, [area]: Number(e.target.value) });
-    };
-
-    const questionCountValues = ['5', '10', '20'];
-    const questionTimeLimitValues = ['0', '30', '60'];
-
     return (
-        <div
-            style={{
-                background: 'linear-gradient(190deg, #FF3008 50%, #C60400 50%)',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '50px 20px'
-            }}
-        >
+        <div className="container">
             {/*<NavBar />*/}
-            <div className="uppercase font-title font-color-cream pt-36">Jautājumi</div>
-            <div className="uppercase font-title font-color-cream mb-8">Atbildes</div>
-
-            {/*TODO, move to component*/}
             {questionNumber === 0 && (
-                <form onSubmit={(e: any) => handleRequestQuestion(e)} className="flex flex-col justify-between h-full">
-                    <div>
-                        <div className="font-color-cream italic font-extrabold mb-2">Jautājumu skaits:</div>
-                        <div className="flex">
-                            {questionCountValues.map((value) => {
-                                return (
-                                    <Checkbox
-                                        key={value}
-                                        fieldType="question_count"
-                                        label={value}
-                                        value={value}
-                                        checked={questionFormValue['question_count'] === Number(value)}
-                                        onChange={handleQuestionFormChange}
-                                    />
-                                );
-                            })}
-                        </div>
-
-                        <div className="font-color-cream italic font-extrabold mb-2 mt-5">Laika limits:</div>
-                        <div className="flex">
-                            {questionTimeLimitValues.map((value) => {
-                                return (
-                                    <Checkbox
-                                        key={value}
-                                        fieldType="time_limit"
-                                        label={value === '0' ? '-' : value}
-                                        value={value}
-                                        checked={questionFormValue['time_limit'] === Number(value)}
-                                        onChange={handleQuestionFormChange}
-                                    />
-                                );
-                            })}
-                        </div>
-                    </div>
-                    <input
-                        className="cursor-pointer rounded-full w-full bg-cream h-10 uppercase font-bold text-red"
-                        type="submit"
-                        value="Aiziet"
-                    />
-                </form>
+                <StartQuiz
+                    questionFormValue={questionFormValue}
+                    setQuestionFormValue={setQuestionFormValue}
+                    handleRequestQuestion={handleRequestQuestion}
+                />
             )}
-            {/*TODO, move to component*/}
             {isShowingQuestion && (
-                <div>
-                    <div>{currentQuestion.question}</div>
-                    <form onSubmit={handleSubmitAnswer}>
-                        <label htmlFor="answer">Atbilde: </label>
-                        <input
-                            id="answer"
-                            name="answer"
-                            type="text"
-                            onChange={(e: any) => setAnswerFormValue(e.target.value)}
-                            value={answerFormValue}
-                        />
-                        <input type="submit" value="Iesniegt" />
-                    </form>
-                </div>
+                <Question
+                    questionNumber={currentQuestion.question}
+                    handleSubmitAnswer={handleSubmitAnswer}
+                    setAnswerFormValue={setAnswerFormValue}
+                    answerFormValue={answerFormValue}
+                />
             )}
-            {/*TODO, move to component*/}
             {isShowingAnswer && (
-                <div>
-                    atbilde: {correctAnswer.isCorrect ? 'pareizi' : 'nepareizi'}
-                    <button
-                        onClick={(e: any) => {
-                            if (questionNumber === questionFormValue.question_count) {
-                                handleShowResult();
-                            } else {
-                                handleRequestQuestion(e);
-                            }
-                        }}
-                    >
-                        {questionNumber === questionFormValue.question_count ? 'Beigt' : 'Nākamais jautājums'}
-                    </button>
-                </div>
+                <Answer
+                    isCorrect={correctAnswer.isCorrect}
+                    questionNumber={questionNumber}
+                    totalQuestions={questionFormValue.question_count}
+                    handleShowResult={handleShowResult}
+                    handleRequestQuestion={handleRequestQuestion}
+                />
             )}
             {isShowingResult && (
-                <div>
-                    Apsveicu! Tavs rezultāts ir {result} pareizas atbildes no {questionFormValue.question_count}{' '}
-                    jautājumiem.
-                    <button onClick={handlePlayAgain}>Atpakaļ uz sākumu</button>
-                </div>
+                <Result result={result} questionFormValue={questionFormValue} handlePlayAgain={handlePlayAgain} />
             )}
         </div>
     );

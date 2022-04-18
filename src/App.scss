@@ -37,11 +37,20 @@ body {
 }
 
 .font-outline {
-    border: 1px solid $cream;
+    -webkit-text-stroke: 1px $cream;
+    color: transparent;
 //    https://stackoverflow.com/questions/4919076/outline-effect-to-text
 }
 
 
 #root {
     @apply h-full;
+}
+
+.container {
+    background: linear-gradient(190deg, #FF3008 50%, #C60400 50%);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 50px 20px;
 }

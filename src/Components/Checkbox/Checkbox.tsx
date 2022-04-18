@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './checkbox.module.scss';
+import './checkbox.module.scss';
 
 type CheckboxProps = {
     fieldType: string;
@@ -21,7 +21,7 @@ const Checkbox: React.FC<CheckboxProps> = ({ fieldType, label, value, checked, o
                 type="checkbox"
                 onChange={(e) => onChange(fieldType, e)}
             />
-            <label className={`${classes.test} select-none`} htmlFor={value}>
+            <label className="select-none" htmlFor={value}>
                 {label}
             </label>
         </span>
