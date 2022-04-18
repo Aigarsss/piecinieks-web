@@ -13,7 +13,8 @@ const Question: React.FC<QuestionProps> = ({ question, handleSubmitAnswer, setAn
     return (
         <div className={`h-full flex flex-col justify-between ${classes.question}`}>
             <div className="font-question mb-10">{question}</div>
-            <form className="relative">
+            {/* OnSubmit submit here to handle enter press */}
+            <form onSubmit={handleSubmitAnswer} className="relative">
                 <input
                     className={classes.answerInput}
                     placeholder="Atbilde"

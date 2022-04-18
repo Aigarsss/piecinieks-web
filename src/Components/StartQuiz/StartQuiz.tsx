@@ -17,7 +17,7 @@ const StartQuiz: React.FC<StartQuizProps> = ({ questionFormValue, setQuestionFor
 
     return (
         <>
-            <div className="uppercase font-title font-color-cream pt-36 font-outline">Lieliskais</div>
+            <div className="uppercase font-title font-color-cream pt-16 font-outline">Lieliskais</div>
             <div className="uppercase font-title font-color-cream mb-8">Piecinieks</div>
 
             <form onSubmit={(e: any) => handleRequestQuestion(e)} className="flex flex-col justify-between h-full">

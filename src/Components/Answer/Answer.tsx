@@ -47,7 +47,7 @@ const Answer: React.FC<AnswerProps> = ({
                     }
                 }}
             >
-                {questionNumber === totalQuestions ? 'Beigt' : 'Nākamais jautājums'}
+                {questionNumber === totalQuestions ? 'Skatīt rezultātu' : 'Tālāk'}
             </button>
         </div>
     );
