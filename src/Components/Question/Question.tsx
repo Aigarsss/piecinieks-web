@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './question.module.scss';
-// import { ReactComponent as ArrowRight } from './assets/arrow-right.svg';
+import { ReactComponent as ArrowRight } from './assets/arrow-right.svg';
 
 type QuestionProps = {
     question: string;
@@ -9,12 +9,7 @@ type QuestionProps = {
     answerFormValue: any;
 };
 
-const Question: React.FC<QuestionProps> = ({
-    question,
-    handleSubmitAnswer,
-    setAnswerFormValue,
-    answerFormValue
-}) => {
+const Question: React.FC<QuestionProps> = ({ question, handleSubmitAnswer, setAnswerFormValue, answerFormValue }) => {
     return (
         <div className={`h-full flex flex-col justify-between ${classes.question}`}>
             <div className="font-question mb-10">{question}</div>
@@ -28,7 +23,10 @@ const Question: React.FC<QuestionProps> = ({
                     onChange={(e: any) => setAnswerFormValue(e.target.value)}
                     value={answerFormValue}
                 />
-                <div className={classes.submitIcon} onClick={handleSubmitAnswer}>➜</div>
+
+                <div className={classes.submitIcon} onClick={handleSubmitAnswer}>
+                    <ArrowRight />
+                </div>
             </form>
         </div>
     );

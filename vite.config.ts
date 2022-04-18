@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 const path = require('path');
+import svgrPlugin from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,5 +17,13 @@ export default defineConfig({
       }
     }
   },
-  plugins: [react()]
+  plugins: [
+      react(),
+    svgrPlugin({
+      svgrOptions: {
+        icon: true,
+        // ...svgr options (https://react-svgr.com/docs/options/)
+      },
+    }),
+  ]
 })
