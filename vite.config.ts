@@ -9,5 +9,12 @@ export default defineConfig({
       '@app': path.resolve(__dirname, './src')
     }
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "./src/scss/global.scss";`
+      }
+    }
+  },
   plugins: [react()]
 })

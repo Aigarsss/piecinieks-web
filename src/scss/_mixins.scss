@@ -1,0 +1,22 @@
+// Mixins
+// -----------------------------------------------------------------------------
+$breakpointsLarge: 1024px;
+
+@mixin screenMedium {
+  @media (max-width: calc(#{$breakpointsLarge} - 1px)) {
+    @content;
+  }
+}
+
+@mixin screenLarge {
+  @media (min-width: $breakpointsLarge) {
+    @content;
+  }
+}
+
+@mixin flex($dir: row, $align: center, $justify: center) {
+  display: flex;
+  flex-direction: $dir;
+  align-items: $align;
+  justify-content: $justify;
+}

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import Home from './Pages/Home';
 // import AddQuestion from './Pages/AddQuestion';
 import SignUp from './Pages/SignUp';
-import './App.css';
+import './App.scss';
 import SignIn from '@app/Pages/SignIn';
 import Dashboard from '@app/Pages/Dashboard';
 import { useLogin } from '@app/Hooks/useLogin';

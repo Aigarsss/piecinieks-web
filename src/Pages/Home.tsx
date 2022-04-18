@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from '@app/Components/NavBar';
 import { useQuestion } from '@app/Hooks/useQuestion';
+import Checkbox from '@app/Components/Checkbox';
 
 const answerFormInitialValue = '';
 
@@ -93,38 +94,67 @@ const Home = () => {
     };
 
     const handleQuestionFormChange = (area: string, e: any) => {
-        setQuestionFormValue({...questionFormValue, [area]: Number(e.target.value)});
-    }
+        setQuestionFormValue({ ...questionFormValue, [area]: Number(e.target.value) });
+    };
+
+    const questionCountValues = ['5', '10', '20'];
+    const questionTimeLimitValues = ['0', '30', '60'];
 
     return (
-        <div style={{
-            background: 'linear-gradient(193.55deg, #FF3008 48.41%, #C60400 48.42%)',
-            height: '100%'
-        }}>
-            <NavBar />
+        <div
+            style={{
+                background: 'linear-gradient(190deg, #FF3008 50%, #C60400 50%)',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '50px 20px'
+            }}
+        >
+            {/*<NavBar />*/}
+            <div className="uppercase font-title font-color-cream pt-36">Jautājumi</div>
+            <div className="uppercase font-title font-color-cream mb-8">Atbildes</div>
+
             {/*TODO, move to component*/}
             {questionNumber === 0 && (
-                <form onSubmit={(e: any) => handleRequestQuestion(e)} className="flex flex-col">
+                <form onSubmit={(e: any) => handleRequestQuestion(e)} className="flex flex-col justify-between h-full">
+                    <div>
+                        <div className="font-color-cream italic font-extrabold mb-2">Jautājumu skaits:</div>
+                        <div className="flex">
+                            {questionCountValues.map((value) => {
+                                return (
+                                    <Checkbox
+                                        key={value}
+                                        fieldType="question_count"
+                                        label={value}
+                                        value={value}
+                                        checked={questionFormValue['question_count'] === Number(value)}
+                                        onChange={handleQuestionFormChange}
+                                    />
+                                );
+                            })}
+                        </div>
 
-                    <div>Jautājumu skaits</div>
-
-                    <label htmlFor="5">5</label>
-                    <input name="5" id="5" value="5" checked={ questionFormValue['question_count'] === Number('5') } type="checkbox" onChange={(e) => handleQuestionFormChange('question_count', e)}/>
-                    <label htmlFor="10">10</label>
-                    <input name="10" id="10" value="10" checked={ questionFormValue['question_count'] === Number('10') } type="checkbox" onChange={(e) => handleQuestionFormChange('question_count',e)}/>
-                    <label htmlFor="20">20</label>
-                    <input name="20" id="20" value="20" checked={ questionFormValue['question_count'] === Number('20') } type="checkbox" onChange={(e) => handleQuestionFormChange('question_count',e)}/>
-
-                    <div>Laika limits</div>
-
-                    <label htmlFor="0">0</label>
-                    <input name="0" id="0" value="0" checked={ questionFormValue['time_limit'] === Number('0') } type="checkbox" onChange={(e) => handleQuestionFormChange('time_limit',e)}/>
-                    <label htmlFor="30">30s</label>
-                    <input name="30" id="30" value="30" checked={ questionFormValue['time_limit'] === Number('30') } type="checkbox" onChange={(e) => handleQuestionFormChange('time_limit',e)}/>
-                    <label htmlFor="60">1min</label>
-                    <input name="60" id="60" value="60" checked={ questionFormValue['time_limit'] === Number('60') } type="checkbox" onChange={(e) => handleQuestionFormChange('time_limit',e)}/>
-
-                    <input type="submit" value="Aiziet" />
+                        <div className="font-color-cream italic font-extrabold mb-2 mt-5">Laika limits:</div>
+                        <div className="flex">
+                            {questionTimeLimitValues.map((value) => {
+                                return (
+                                    <Checkbox
+                                        key={value}
+                                        fieldType="time_limit"
+                                        label={value === '0' ? '-' : value}
+                                        value={value}
+                                        checked={questionFormValue['time_limit'] === Number(value)}
+                                        onChange={handleQuestionFormChange}
+                                    />
+                                );
+                            })}
+                        </div>
+                    </div>
+                    <input
+                        className="cursor-pointer rounded-full w-full bg-cream h-10 uppercase font-bold text-red"
+                        type="submit"
+                        value="Aiziet"
+                    />
                 </form>
             )}
             {/*TODO, move to component*/}
@@ -165,7 +195,7 @@ const Home = () => {
                 <div>
                     Apsveicu! Tavs rezultāts ir {result} pareizas atbildes no {questionFormValue.question_count}{' '}
                     jautājumiem.
-                    <button onClick={handlePlayAgain}>Atpakaļ uz sākmu</button>
+                    <button onClick={handlePlayAgain}>Atpakaļ uz sākumu</button>
                 </div>
             )}
         </div>
