@@ -1,6 +1,7 @@
 import React from 'react';
 import { ReactComponent as Wrong } from './assets/x-circle.svg';
 import { ReactComponent as Correct } from './assets/check-circle.svg';
+import classes from './answer.module.scss';
 
 type AnswerProps = {
     correctAnswer: any;
@@ -26,7 +27,7 @@ const Answer: React.FC<AnswerProps> = ({
             <div>
                 <div className="font-question mb-10">{question}</div>
                 <div className="pl-8 relative mb-6">
-                    <span className="absolute left-1 top-5">
+                    <span className={`absolute left-1 top-5 ${classes.stamp}`}>
                         {isCorrect ? <Correct height={24} width={24} /> : <Wrong height={24} width={24} />}
                     </span>
                     <span className="text-sm block">Tava Atbilde:</span>

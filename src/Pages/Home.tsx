@@ -5,8 +5,7 @@ import StartQuiz from '@app/Components/StartQuiz';
 import Result from '@app/Components/Result';
 import Question from '@app/Components/Question';
 import Answer from '@app/Components/Answer';
-
-const answerFormInitialValue = '';
+import { useSpring, animated, config } from 'react-spring';
 
 const questionFormInitialValue = {
     question_count: 5,
@@ -20,13 +19,13 @@ type QuestionForm = {
 
 const Home = () => {
     const { getRandomQuestion, getAnswerCheck } = useQuestion();
-    const [usedIds, setUsedIds] = useState<Array<String>>([]);
-    const [isShowingQuestion, setIsShowingQuestion] = useState(false);
-    const [isShowingAnswer, setIsShowingAnswer] = useState(false);
-    const [isShowingResult, setIsShowingResult] = useState(false);
+    const [usedIds, setUsedIds] = useState<Array<string>>([]);
+    const [isShowingQuestion, setIsShowingQuestion] = useState<boolean>(false);
+    const [isShowingAnswer, setIsShowingAnswer] = useState<boolean>(false);
+    const [isShowingResult, setIsShowingResult] = useState<boolean>(false);
     const [currentQuestion, setCurrentQuestion] = useState<any>({});
     const [correctAnswer, setCorrectAnswer] = useState<any>({});
-    const [answerFormValue, setAnswerFormValue] = useState<string>(answerFormInitialValue);
+    const [answerFormValue, setAnswerFormValue] = useState<string>('');
     const [questionFormValue, setQuestionFormValue] = useState<QuestionForm>(questionFormInitialValue);
     const [questionNumber, setQuestionNumber] = useState<number>(0);
     const [result, setResult] = useState<number>(0);
@@ -47,14 +46,10 @@ const Home = () => {
         // Adds used question ID to query variable filter
         setUsedIds([...usedIds, data.randomQuestion[0].id]);
         setCurrentQuestion({ currentQuestion, ...data.randomQuestion[0] });
-
         setQuestionNumber(questionNumber + 1);
-
         // Show fetched question
         setIsShowingQuestion(true);
-
         setIsShowingAnswer(false);
-
         // Clear correct answer data and form
         setAnswerFormValue('');
         setCorrectAnswer({});
@@ -91,15 +86,17 @@ const Home = () => {
         setResult(0);
         setQuestionNumber(0);
         setQuestionFormValue(questionFormInitialValue);
-
         // Resets used Ids. If there are a lot of questions, could consider not to reset
         setUsedIds([]);
     };
 
-    const containerClass = isShowingResult || questionNumber === 0 ? 'container-red' : 'container-light';
+    const animation = useSpring({
+        background: isShowingResult || questionNumber === 0 ? 'linear-gradient(190deg, #FF3008 50%, #C60400 50%)' : 'linear-gradient(350deg, #FEF1E9 50%, #FFFFFF 50%)',
+        config: config.gentle
+    });
 
     return (
-        <div className={containerClass}>
+        <animated.div style={animation} className="container">
             {/*<NavBar />*/}
             {questionNumber === 0 && (
                 <StartQuiz
@@ -129,7 +126,7 @@ const Home = () => {
             {isShowingResult && (
                 <Result result={result} questionFormValue={questionFormValue} handlePlayAgain={handlePlayAgain} />
             )}
-        </div>
+        </animated.div>
     );
 };
 

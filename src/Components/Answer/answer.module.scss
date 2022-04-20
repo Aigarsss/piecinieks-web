@@ -1,0 +1,22 @@
+.stamp {
+  transform: rotate(-20deg) scale(20);
+  animation-name: stamp;
+  animation-duration: 0.5s;
+  opacity: 0;
+  animation-fill-mode:forwards;
+}
+
+@keyframes stamp{
+  0%{
+    opacity: 0;
+  }
+  10%{
+    opacity:.50;
+    transform: rotate(-20deg) scale(20);
+    transition: all .3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  }
+  100%{
+    opacity:1;
+    transform: rotate(0deg) scale(1);
+  }
+}
