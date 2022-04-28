@@ -35,6 +35,8 @@ const App: React.FC = () => {
                 {/*<Route path="/addQuestion" element={<PrivateAdminRoute component={AddQuestion} />} />*/}
                 {/*Accessed directly, prompted for login*/}
                 <Route path="/dashboard" element={<PrivateRoute component={Dashboard} />} />
+                <Route path="*" element={<Navigate to="/" replace />}
+                />
             </Routes>
         </Router>
     );
