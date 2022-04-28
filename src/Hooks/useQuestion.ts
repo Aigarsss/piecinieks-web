@@ -26,6 +26,7 @@ type UseQuestion = {
     questionsError: ApolloError | undefined;
     handleDeleteQuestion: (questionId: string) => void;
     handleAddQuestion: (questionVariables: any) => Promise<FetchResult<{ addQuestion: Question }>>;
+    isRandomQuestionLoading: boolean;
 };
 
 export const useQuestion = (): UseQuestion => {
@@ -72,6 +73,7 @@ export const useQuestion = (): UseQuestion => {
         allQuestionsLoading,
         questionsError,
         handleDeleteQuestion,
-        handleAddQuestion
+        handleAddQuestion,
+        isRandomQuestionLoading
     };
 };

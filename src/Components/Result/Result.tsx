@@ -15,12 +15,8 @@ const Result: React.FC<ResultProps> = ({ result, questionFormValue, handlePlayAg
             </div>
 
             <span className="flex justify-center items-end">
-                <span className="text-7xl font-extrabold italic text-cream">
-                    {result}
-                </span>
-                <span className="text-3xl font-extrabold italic text-cream">
-                    / {questionFormValue.question_count}
-                </span>
+                <span className="text-7xl font-extrabold italic text-cream">{result}</span>
+                <span className="text-3xl font-extrabold italic text-cream">/ {questionFormValue.question_count}</span>
             </span>
 
             <button

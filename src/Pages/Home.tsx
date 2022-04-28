@@ -6,6 +6,7 @@ import Result from '@app/Components/Result';
 import Question from '@app/Components/Question';
 import Answer from '@app/Components/Answer';
 import { useSpring, animated, config } from 'react-spring';
+import Loader from '@app/Components/Loader';
 
 const questionFormInitialValue = {
     question_count: 5,
@@ -18,7 +19,6 @@ type QuestionForm = {
 };
 
 const Home = () => {
-    const { getRandomQuestion, getAnswerCheck } = useQuestion();
     const [usedIds, setUsedIds] = useState<Array<string>>([]);
     const [isShowingQuestion, setIsShowingQuestion] = useState<boolean>(false);
     const [isShowingAnswer, setIsShowingAnswer] = useState<boolean>(false);
@@ -29,6 +29,7 @@ const Home = () => {
     const [questionFormValue, setQuestionFormValue] = useState<QuestionForm>(questionFormInitialValue);
     const [questionNumber, setQuestionNumber] = useState<number>(0);
     const [result, setResult] = useState<number>(0);
+    const { getRandomQuestion, getAnswerCheck, isRandomQuestionLoading } = useQuestion();
 
     useEffect(() => {
         document.title = 'Sākums - Piecinieks';
@@ -37,6 +38,7 @@ const Home = () => {
     const handleRequestQuestion = async (e: any) => {
         e.preventDefault();
 
+        // TODO. This should bemove to hook, but it doesnt work when put in there, returns undefined on first loads
         const { data } = await getRandomQuestion({
             variables: {
                 usedIds: usedIds
@@ -91,9 +93,21 @@ const Home = () => {
     };
 
     const animation = useSpring({
-        background: isShowingResult || questionNumber === 0 ? 'linear-gradient(190deg, #FF3008 50%, #C60400 50%)' : 'linear-gradient(350deg, #FEF1E9 50%, #FFFFFF 50%)',
+        background:
+            isShowingResult || questionNumber === 0
+                ? 'linear-gradient(190deg, #FF3008 50%, #C60400 50%)'
+                : 'linear-gradient(350deg, #FEF1E9 50%, #FFFFFF 50%)',
         config: config.gentle
     });
+
+    // Get random question loader
+    if (isRandomQuestionLoading) {
+        return (
+            <animated.div style={animation} className="container justify-center items-center">
+                <Loader />
+            </animated.div>
+        );
+    }
 
     return (
         <animated.div style={animation} className="container">
