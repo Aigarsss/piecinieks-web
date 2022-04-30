@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 type UniversalFormProps = {
     action: ({}) => void;
@@ -79,10 +79,26 @@ const UniversalForm: React.FC<UniversalFormProps> = ({ action, formType }) => {
                     Parole
                 </label>
             </div>
-            {formType === 'signUp' ?
-                <p className="text-custom-black mb-3">Tev jau ir konts? <Link to={'/signIn'} className="font-bold text-custom-orange">Ienāc.</Link></p> :
-                <p className="text-custom-black mb-3">Tev vēl nav konts? <Link to={'/signUp'} className="font-bold text-custom-orange">Reģistrējies.</Link></p>}
-            <input type="submit" value="Turpināt" className="cursor-pointer rounded-full w-64 bg-custom-orange h-11 uppercase font-bold text-cream" />
+            {formType === 'signUp' ? (
+                <p className="text-custom-black mb-3">
+                    Tev jau ir konts?{' '}
+                    <Link to={'/signIn'} className="font-bold text-custom-orange">
+                        Ienāc.
+                    </Link>
+                </p>
+            ) : (
+                <p className="text-custom-black mb-3">
+                    Tev vēl nav konts?{' '}
+                    <Link to={'/signUp'} className="font-bold text-custom-orange">
+                        Reģistrējies.
+                    </Link>
+                </p>
+            )}
+            <input
+                type="submit"
+                value="Turpināt"
+                className="cursor-pointer rounded-full w-64 bg-custom-orange h-11 uppercase font-bold text-cream"
+            />
         </form>
     );
 };

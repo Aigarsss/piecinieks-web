@@ -32,7 +32,7 @@ const AdminDashboard = () => {
     }
     return (
         <Container>
-            <div className="flex">
+            <div className="flex pt-12">
                 <div className="ml-10 cursor-pointer" onClick={() => switchPageArea('add')}>
                     Ievadīt jautājumus
                 </div>

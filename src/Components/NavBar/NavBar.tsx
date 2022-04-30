@@ -24,6 +24,11 @@ const NavBar = () => {
         config: config.gentle
     });
 
+    const logOut = () => {
+        handleLogOut();
+        handleShowMenu();
+    };
+
     return (
         <nav className=" py-4 bg-custom-orange absolute flex items-center w-full justify-between top-0 select-none">
             <div className="px-6 w-full flex flex-wrap items-center justify-between">
@@ -36,17 +41,17 @@ const NavBar = () => {
                             5inieks
                         </Link>
                     </li>
-                    <li className="nav-item flex items-center cursor-pointer" onClick={handleShowMenu}>
-                        {!isLoggedIn ? (
+                    {!isLoggedIn ? (
+                        <li className="nav-item flex items-center cursor-pointer">
                             <Link to="/signIn">
                                 <User width={24} height={24} />
                             </Link>
-                        ) : isMenuOpen ? (
-                            <X width={24} height={24} />
-                        ) : (
-                            <Menu width={24} height={24} />
-                        )}
-                    </li>
+                        </li>
+                    ) : (
+                        <li className="nav-item flex items-center cursor-pointer" onClick={handleShowMenu}>
+                            {isMenuOpen ? <X width={24} height={24} /> : <Menu width={24} height={24} />}
+                        </li>
+                    )}
                 </ul>
             </div>
 
@@ -57,12 +62,12 @@ const NavBar = () => {
                         className="mobileMenu absolute right-0 top-12 flex flex-col items-end bg-cream px-6 py-5 select-none z-10"
                     >
                         {isAdmin && (
-                            <li className="pb-4">
+                            <li className="pb-4 cursor-pointer">
                                 <Link to="/dashboard">Jautājumi</Link>
                             </li>
                         )}
-                        {/*<li className="pb-4">Rezultāti</li>*/}
-                        <li className="text-custom-red" onClick={handleLogOut}>
+                        {/*<li className="pb-4 cursor-pointer">Rezultāti</li>*/}
+                        <li className="text-custom-red cursor-pointer" onClick={logOut}>
                             Iziet
                         </li>
                     </animated.ul>
