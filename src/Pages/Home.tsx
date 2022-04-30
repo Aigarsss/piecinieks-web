@@ -7,7 +7,7 @@ import Question from '@app/Components/Question';
 import Answer from '@app/Components/Answer';
 import { useSpring, animated, config } from 'react-spring';
 import Loader from '@app/Components/Loader';
-import Container from "@app/Components/Container";
+import Container from '@app/Components/Container';
 
 const questionFormInitialValue = {
     question_count: 5,
@@ -104,9 +104,11 @@ const Home = () => {
     // Get random question loader
     if (isRandomQuestionLoading) {
         return (
-            <animated.div style={animation} className="container justify-center items-center">
-                <Loader />
-            </animated.div>
+            <Container>
+                <animated.div style={animation} className="w-full h-full flex flex-col px-5 pb-12">
+                    <Loader />
+                </animated.div>
+            </Container>
         );
     }
 

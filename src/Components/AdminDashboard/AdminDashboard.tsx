@@ -3,6 +3,7 @@ import QuestionTable from '@app/Components/QuestionTable';
 import AddQuestionForm from '@app/Components/AddQuestionForm';
 import { Question, useQuestion } from '@app/Hooks/useQuestion';
 import Loader from '@app/Components/Loader';
+import Container from '@app/Components/Container';
 
 type PageArea = 'add' | 'viewAll';
 
@@ -30,7 +31,7 @@ const AdminDashboard = () => {
         return <Loader />;
     }
     return (
-        <div>
+        <Container>
             <div className="flex">
                 <div className="ml-10 cursor-pointer" onClick={() => switchPageArea('add')}>
                     Ievadīt jautājumus
@@ -43,7 +44,7 @@ const AdminDashboard = () => {
                 <AddQuestionForm addedQuestions={addedQuestions} setAddedQuestions={setAddedQuestions} />
             )}
             <QuestionTable questions={pageArea === 'add' ? addedQuestions : allQuestions} handleDelete={handleDelete} />
-        </div>
+        </Container>
     );
 };
 
