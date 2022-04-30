@@ -56,12 +56,11 @@ const NavBar = () => {
                         style={animation}
                         className="mobileMenu absolute right-0 top-12 flex flex-col items-end bg-cream px-6 py-5 select-none z-10"
                     >
-                        {
-                            isAdmin &&
+                        {isAdmin && (
                             <li className="pb-4">
                                 <Link to="/dashboard">Jautājumi</Link>
                             </li>
-                        }
+                        )}
                         {/*<li className="pb-4">Rezultāti</li>*/}
                         <li className="text-custom-red" onClick={handleLogOut}>
                             Iziet
