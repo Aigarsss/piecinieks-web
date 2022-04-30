@@ -6,7 +6,7 @@ const NavBar = () => {
     const { isLoggedIn, handleLogOut } = useLogin();
 
     return (
-        <nav className="navbar navbar-expand-lg shadow-md py-2 bg-white relative flex items-center w-full justify-between mb-8">
+        <nav className="navbar navbar-expand-lg shadow-md py-2 bg-black absolute flex items-center w-full justify-between mb-8 top-0">
             <div className="px-6 w-full flex flex-wrap items-center justify-between">
                 <div className="navbar-collapse collapse grow items-center" id="navbarSupportedContentY">
                     <ul className="navbar-nav mr-auto flex lg:flex-row">

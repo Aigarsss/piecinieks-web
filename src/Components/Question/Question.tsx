@@ -11,7 +11,7 @@ type QuestionProps = {
 
 const Question: React.FC<QuestionProps> = ({ question, handleSubmitAnswer, setAnswerFormValue, answerFormValue }) => {
     return (
-        <div className={`h-full flex flex-col justify-between ${classes.question}`}>
+        <div className={`h-full flex flex-col justify-between pt-16 ${classes.question}`}>
             <div className="font-question mb-10">{question}</div>
             {/* OnSubmit submit here to handle enter press */}
             <form onSubmit={handleSubmitAnswer} className="relative">

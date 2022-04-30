@@ -7,6 +7,7 @@ import Question from '@app/Components/Question';
 import Answer from '@app/Components/Answer';
 import { useSpring, animated, config } from 'react-spring';
 import Loader from '@app/Components/Loader';
+import Container from "@app/Components/Container";
 
 const questionFormInitialValue = {
     question_count: 5,
@@ -110,37 +111,38 @@ const Home = () => {
     }
 
     return (
-        <animated.div style={animation} className="container">
-            {/*<NavBar />*/}
-            {questionNumber === 0 && (
-                <StartQuiz
-                    questionFormValue={questionFormValue}
-                    setQuestionFormValue={setQuestionFormValue}
-                    handleRequestQuestion={handleRequestQuestion}
-                />
-            )}
-            {isShowingQuestion && (
-                <Question
-                    question={currentQuestion.question}
-                    handleSubmitAnswer={handleSubmitAnswer}
-                    setAnswerFormValue={setAnswerFormValue}
-                    answerFormValue={answerFormValue}
-                />
-            )}
-            {isShowingAnswer && (
-                <Answer
-                    correctAnswer={correctAnswer}
-                    submittedAnswer={answerFormValue}
-                    questionNumber={questionNumber}
-                    totalQuestions={questionFormValue.question_count}
-                    handleShowResult={handleShowResult}
-                    handleRequestQuestion={handleRequestQuestion}
-                />
-            )}
-            {isShowingResult && (
-                <Result result={result} questionFormValue={questionFormValue} handlePlayAgain={handlePlayAgain} />
-            )}
-        </animated.div>
+        <Container>
+            <animated.div style={animation} className="w-full h-full flex flex-col px-5 pb-12">
+                {questionNumber === 0 && (
+                    <StartQuiz
+                        questionFormValue={questionFormValue}
+                        setQuestionFormValue={setQuestionFormValue}
+                        handleRequestQuestion={handleRequestQuestion}
+                    />
+                )}
+                {isShowingQuestion && (
+                    <Question
+                        question={currentQuestion.question}
+                        handleSubmitAnswer={handleSubmitAnswer}
+                        setAnswerFormValue={setAnswerFormValue}
+                        answerFormValue={answerFormValue}
+                    />
+                )}
+                {isShowingAnswer && (
+                    <Answer
+                        correctAnswer={correctAnswer}
+                        submittedAnswer={answerFormValue}
+                        questionNumber={questionNumber}
+                        totalQuestions={questionFormValue.question_count}
+                        handleShowResult={handleShowResult}
+                        handleRequestQuestion={handleRequestQuestion}
+                    />
+                )}
+                {isShowingResult && (
+                    <Result result={result} questionFormValue={questionFormValue} handlePlayAgain={handlePlayAgain} />
+                )}
+            </animated.div>
+        </Container>
     );
 };
 
