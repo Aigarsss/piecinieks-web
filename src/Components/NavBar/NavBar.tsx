@@ -4,10 +4,11 @@ import { useLogin } from '@app/Hooks/useLogin';
 import { useNavBar } from '@app/Hooks/useNavBar';
 import { ReactComponent as Menu } from './assets/menu.svg';
 import { ReactComponent as X } from './assets/x.svg';
+import { ReactComponent as User } from './assets/user.svg';
 import { useSpring, animated, config } from 'react-spring';
 
 const NavBar = () => {
-    const { isLoggedIn, handleLogOut } = useLogin();
+    const { isLoggedIn, handleLogOut, isAdmin } = useLogin();
     const { isMenuOpen, handleShowMenu } = useNavBar();
 
     // TODO calculate height
@@ -20,7 +21,6 @@ const NavBar = () => {
 
     const bgAnimation = useSpring({
         opacity: isMenuOpen ? '1' : '0',
-        // transform: isMenuOpen ? "translateX(0)" : "translateX(100%)",
         config: config.gentle
     });
 
@@ -37,9 +37,15 @@ const NavBar = () => {
                         </Link>
                     </li>
                     <li className="nav-item flex items-center cursor-pointer" onClick={handleShowMenu}>
-                        {
-                            isMenuOpen ? <X width={24} height={24} /> : <Menu width={24} height={24} />
-                        }
+                        {!isLoggedIn ? (
+                            <Link to="/signIn">
+                                <User width={24} height={24} />
+                            </Link>
+                        ) : isMenuOpen ? (
+                            <X width={24} height={24} />
+                        ) : (
+                            <Menu width={24} height={24} />
+                        )}
                     </li>
                 </ul>
             </div>
@@ -50,11 +56,16 @@ const NavBar = () => {
                         style={animation}
                         className="mobileMenu absolute right-0 top-12 flex flex-col items-end bg-cream px-6 py-5 select-none z-10"
                     >
-                        <li className="pb-4">
-                            <Link to="/dashboard">Jautājumi</Link>
+                        {
+                            isAdmin &&
+                            <li className="pb-4">
+                                <Link to="/dashboard">Jautājumi</Link>
+                            </li>
+                        }
+                        {/*<li className="pb-4">Rezultāti</li>*/}
+                        <li className="text-custom-red" onClick={handleLogOut}>
+                            Iziet
                         </li>
-                        <li className="pb-4">Rezultāti</li>
-                        <li className="text-custom-red">Iziet</li>
                     </animated.ul>
                     <animated.div
                         style={bgAnimation}
@@ -70,41 +81,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-// <li className="nav-item">
-//     <Link
-//         to="/dashboard"
-//         className="nav-link rounded-lg block pr-2 lg:px-2 py-2 text-gray-600 hover:bg-blue-100 focus:text-gray-700 transition duration-300 ease-in-out"
-//     >
-//         Dashboard
-//     </Link>
-// </li>
-// {isLoggedIn ? (
-//     <li className="nav-item flex justify-center items-center">
-//         <button
-//             onClick={handleLogOut}
-//             className="relative bg-red-500 text-white p-2 text-sm rounded font-bold overflow-visible"
-//         >
-//             Iziet
-//         </button>
-//     </li>
-// ) : (
-//     <>
-//         <li className="nav-item flex justify-center items-center">
-//             <Link
-//                 to="/signUp"
-//                 className="relative bg-blue-500 text-white p-2 text-sm rounded font-bold overflow-visible"
-//             >
-//                 Reģistrēties
-//             </Link>
-//         </li>
-//         <li className="nav-item flex justify-center items-center">
-//             <Link
-//                 to="/signIn"
-//                 className="relative bg-blue-500 text-white p-2 text-sm rounded font-bold overflow-visible"
-//             >
-//                 Ienākt
-//             </Link>
-//         </li>
-//     </>
-// )}
