@@ -23,7 +23,7 @@ const Answer: React.FC<AnswerProps> = ({
     const { question, isCorrect, acceptedAnswers } = correctAnswer;
 
     return (
-        <div className="flex flex-col h-full pt-16 justify-between">
+        <div className="flex flex-col h-full pt-5 justify-between">
             <div>
                 <div className="font-question mb-10">{question}</div>
                 <div className="pl-8 relative mb-6">

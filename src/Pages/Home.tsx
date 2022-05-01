@@ -122,6 +122,11 @@ const Home = () => {
                         handleRequestQuestion={handleRequestQuestion}
                     />
                 )}
+                {(isShowingQuestion || isShowingAnswer) && (
+                    <div className="pt-10 font-extrabold text-xl">
+                        {questionNumber}/{questionFormValue.question_count}
+                    </div>
+                )}
                 {isShowingQuestion && (
                     <Question
                         question={currentQuestion.question}
