@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import NavBar from '@app/Components/NavBar';
 import { useQuestion } from '@app/Hooks/useQuestion';
 import StartQuiz from '@app/Components/StartQuiz';
 import Result from '@app/Components/Result';
@@ -11,7 +10,7 @@ import Container from '@app/Components/Container';
 
 const questionFormInitialValue = {
     question_count: 5,
-    time_limit: 0
+    time_limit: -1
 };
 
 type QuestionForm = {
@@ -58,8 +57,7 @@ const Home = () => {
         setCorrectAnswer({});
     };
 
-    const handleSubmitAnswer = async (e: any) => {
-        e.preventDefault();
+    const handleSubmitAnswer = async () => {
         // https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forms_and_events/#:~:text=Typing%20onSubmit%2C%20with%20Uncontrolled%20components%20in%20a%20Form
 
         // Get answer value
@@ -129,6 +127,7 @@ const Home = () => {
                 )}
                 {isShowingQuestion && (
                     <Question
+                        timeLimit={questionFormValue.time_limit}
                         question={currentQuestion.question}
                         handleSubmitAnswer={handleSubmitAnswer}
                         setAnswerFormValue={setAnswerFormValue}

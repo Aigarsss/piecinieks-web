@@ -2,14 +2,15 @@ import React from 'react';
 import { ReactComponent as Wrong } from './assets/x-circle.svg';
 import { ReactComponent as Correct } from './assets/check-circle.svg';
 import classes from './answer.module.scss';
+import { Question } from '@app/Hooks/useQuestion';
 
 type AnswerProps = {
-    correctAnswer: any;
-    submittedAnswer: any;
+    correctAnswer: Question;
+    submittedAnswer: string;
     questionNumber: number;
     totalQuestions: number;
-    handleShowResult: any;
-    handleRequestQuestion: any;
+    handleShowResult: () => void;
+    handleRequestQuestion: (e: any) => void;
 };
 
 const Answer: React.FC<AnswerProps> = ({

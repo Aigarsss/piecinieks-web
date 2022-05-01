@@ -2,7 +2,7 @@ import React from 'react';
 import Checkbox from '@app/Components/Checkbox';
 
 const questionCountValues = ['5', '10', '20'];
-const questionTimeLimitValues = ['0', '30', '60'];
+const questionTimeLimitValues = ['-1', '30', '60', '120'];
 
 type StartQuizProps = {
     questionFormValue: any;
@@ -45,7 +45,7 @@ const StartQuiz: React.FC<StartQuizProps> = ({ questionFormValue, setQuestionFor
                                 <Checkbox
                                     key={value}
                                     fieldType="time_limit"
-                                    label={value === '0' ? '-' : value}
+                                    label={value === '-1' ? '-' : value}
                                     value={value}
                                     checked={questionFormValue['time_limit'] === Number(value)}
                                     onChange={handleQuestionFormChange}
