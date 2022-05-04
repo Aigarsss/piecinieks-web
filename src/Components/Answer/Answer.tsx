@@ -21,7 +21,7 @@ const Answer: React.FC<AnswerProps> = ({
     handleShowResult,
     handleRequestQuestion
 }) => {
-    const { question, isCorrect, acceptedAnswers } = correctAnswer;
+    const { question, isCorrect, acceptedAnswers, explanation } = correctAnswer;
 
     return (
         <div className="flex flex-col h-full pt-5 justify-between">
@@ -38,6 +38,12 @@ const Answer: React.FC<AnswerProps> = ({
                     <span className="text-sm block">Pieņemtās atbildes:</span>
                     <span className="italic font-extrabold text-lg">{acceptedAnswers}</span>
                 </div>
+                {explanation && (
+                    <div className="pl-8 pt-4">
+                        <span className="text-sm block">Skaidrojums:</span>
+                        <span className="italic text-lg">{explanation}</span>
+                    </div>
+                )}
             </div>
             <button
                 className="cursor-pointer rounded-full w-full bg-custom-orange h-11 uppercase font-bold text-cream"

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from './question.module.scss';
 import { ReactComponent as ArrowRight } from './assets/arrow-right.svg';
 
@@ -10,7 +10,13 @@ type QuestionProps = {
     answerFormValue: any;
 };
 
-const Question: React.FC<QuestionProps> = ({ question, timeLimit, handleSubmitAnswer, setAnswerFormValue, answerFormValue }) => {
+const Question: React.FC<QuestionProps> = ({
+    question,
+    timeLimit,
+    handleSubmitAnswer,
+    setAnswerFormValue,
+    answerFormValue
+}) => {
     const [seconds, setSeconds] = useState(timeLimit);
 
     useEffect(() => {
@@ -22,7 +28,7 @@ const Question: React.FC<QuestionProps> = ({ question, timeLimit, handleSubmitAn
                 if (seconds === 0) {
                     handleSubmitAnswer();
                 }
-            }, 1000)
+            }, 1000);
             return () => {
                 clearInterval(myInterval);
             };
@@ -35,9 +41,11 @@ const Question: React.FC<QuestionProps> = ({ question, timeLimit, handleSubmitAn
     return (
         <div className={`h-full flex flex-col justify-between pt-5 ${classes.question}`}>
             <div className="font-question mb-10 relative">
-                {
-                    seconds !== -1 && <span className="absolute -top-12 right-0 font-extrabold text-custom-orange text-xl">{`0${min}:${sec < 10 ? `0${sec}` : sec}`}</span>
-                }
+                {seconds !== -1 && (
+                    <span className="absolute -top-12 right-0 font-extrabold text-custom-orange text-xl">{`0${min}:${
+                        sec < 10 ? `0${sec}` : sec
+                    }`}</span>
+                )}
                 {question}
             </div>
             <div className="relative">
@@ -59,7 +67,10 @@ const Question: React.FC<QuestionProps> = ({ question, timeLimit, handleSubmitAn
                     onChange={(e: any) => setAnswerFormValue(e.target.value)}
                     value={answerFormValue}
                 />
-                <div className={classes.submitIcon} onClick={handleSubmitAnswer}>
+                <div
+                    className={classes.submitIcon}
+                    onClick={() => answerFormValue.length !== 0 && handleSubmitAnswer()}
+                >
                     <ArrowRight />
                 </div>
             </div>

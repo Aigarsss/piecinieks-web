@@ -105,6 +105,9 @@ const Home = () => {
             <Container>
                 <animated.div style={animation} className="w-full h-full flex flex-col px-5 pb-12">
                     <Loader />
+                    {questionNumber === 0 && (
+                        <div className="text-cream">*Pirmā ielāde var aizņemt līdz pat 30 sekundes</div>
+                    )}
                 </animated.div>
             </Container>
         );
